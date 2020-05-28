@@ -8,5 +8,81 @@
 <body>
   <!-- Include the script that builds the page and powers Netlify CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+
+  <script type="module">
+    CMS.registerPreviewStyle('https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css');
+
+    // https://github.com/developit/htm
+    // https://github.com/blikblum/to-htm
+    // https://blikblum.github.io/to-htm/web/dist/
+
+    import htm from 'https://unpkg.com/htm?module'
+    const html = htm.bind(h);
+
+    const HomePreview = createClass({
+      render: function() {
+        return (
+          html`
+            <div class="container my-5">${this.props.widgetFor('body')}</div>
+          `
+        );
+      }
+    });
+
+    CMS.registerPreviewTemplate('home', HomePreview);
+
+    CMS.registerEditorComponent({
+      id: "row",
+      label: "Row",
+      fields: [
+        {name: 'content', label: 'Row Content', widget: 'markdown'},
+      ],
+      pattern: /^{{< row ?(class="(.*?)")? >}}\n((.|\n)*?)\n{{< \/row >}}/,
+      fromBlock: function(match) {
+        return {
+          class: match[2],
+          content: match[3],
+        };
+      },
+      toBlock: function(obj) {
+        return `{{< row class="${obj.class}" >}}\n${obj.content}\n{{< /row >}}`;
+      },
+      toPreview: function(obj) {
+        return (
+          `<div class="row ${obj.class}">
+            ${obj.content}
+          </div>`
+        );
+      }
+    });
+
+    CMS.registerEditorComponent({
+      id: "col",
+      label: "Column",
+      fields: [
+        {name: 'content', label: 'Column Content', widget: 'markdown'},
+      ],
+      pattern: /^{{< col ?(class="(.*?)")? >}}\n((.|\n)*?)\n{{< \/col >}}/,
+      fromBlock: function(match) {
+        return {
+          class: match[2],
+          content: match[3],
+        };
+      },
+      toBlock: function(obj) {
+        return `{{< col class="${obj.class}" >}}\n${obj.content}\n{{< /col >}}`;
+      },
+      toPreview: function(obj) {
+        return (
+          `<div class="row ${obj.class}">
+            ${obj.content}
+          </div>`
+        );
+      }
+    });
+
+
+  </script>
+
 </body>
 </html>

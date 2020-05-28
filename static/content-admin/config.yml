@@ -1,12 +1,19 @@
+backend:
+  name: github
+  repo: robbymilo/hugo-netlifycmsd # Path to your GitHub repository
+  branch: master
+  base_url: https://localhost:1313/
+
 local_backend: true
 site_url: http://localhost:1313/
+media_folder: "/static"
 
 collections:
-  - name: "press"
-    label: "Press"
-    label_singular: "Press Post"
-    format: "toml-frontmatter"
-    file: "content/index.md"
+  - name: "home"
+    label: "Homepage"
+    label_singular: "Homepage"
+    format: "yaml-frontmatter"
+    folder: content
     editor:
       preview: true
     fields:
