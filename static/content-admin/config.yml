@@ -1,0 +1,14 @@
+local_backend: true
+site_url: http://localhost:1313/
+
+collections:
+  - name: "press"
+    label: "Press"
+    label_singular: "Press Post"
+    format: "toml-frontmatter"
+    file: "content/index.md"
+    editor:
+      preview: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
