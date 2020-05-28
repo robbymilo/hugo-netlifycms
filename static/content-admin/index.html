@@ -37,7 +37,7 @@
       fields: [
         {name: 'content', label: 'Row Content', widget: 'markdown'},
       ],
-      pattern: /^{{< row ?(class="(.*?)")? >}}\n((.|\n)*?)\n{{< \/row >}}/,
+      pattern: /^{{< row ?(class="(.*?)")? >}}\n([\S\s]*?)\n{{< \/row >}}/,
       fromBlock: function(match) {
         return {
           class: match[2],
@@ -62,7 +62,7 @@
       fields: [
         {name: 'content', label: 'Column Content', widget: 'markdown'},
       ],
-      pattern: /^{{< col ?(class="(.*?)")? >}}\n((.|\n)*?)\n{{< \/col >}}/,
+      pattern: /^{{< col ?(class="(.*?)")? >}}\n([\S\s]*?)\n{{< \/col >}}/,
       fromBlock: function(match) {
         return {
           class: match[2],

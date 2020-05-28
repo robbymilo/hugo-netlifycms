@@ -1,7 +1,7 @@
 ---
 title: Hugo Shortcodes and Netlify CMS
 ---
-# Test repo for Hugo shortcodes and Netlify-CMS
+# Test repo for Hugo shortcodes and Netlify-CMS toPreview
 
 {{< row class="justify-content-center my-5" >}}
 {{< col class="col-md-3" >}}
