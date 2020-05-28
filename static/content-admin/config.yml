@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: robbymilo/hugo-netlifycmsd # Path to your GitHub repository
+  repo: robbymilo/hugo-netlifycms # Path to your GitHub repository
   branch: master
   base_url: https://localhost:1313/
 
