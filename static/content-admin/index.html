@@ -53,15 +53,14 @@
 
         const final_columns = [];
         const columns = obj.content.match(/^{{< col ?(class="(.*?)")? >}}\n([\S\s]*?)\n{{< \/col >}}/gm);
-        columns.forEach(column => {
-          final_columns.push(`<div class="${column.match(column_pattern)[2]}">${column.match(column_pattern)[3]}</div>`)
-        })
 
         console.log(final_columns)
 
         return (
           `<div class="row ${obj.class}">
-              ${final_columns}
+              ${columns.map(function(column, key){
+                return (`<div class=${column.match(column_pattern)[2]} key=${key}>${column.match(column_pattern)[3]}</div>`)
+              }).join('')}
           </div>`
         );
       }
