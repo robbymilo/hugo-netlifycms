@@ -31,6 +31,8 @@
 
     CMS.registerPreviewTemplate('home', HomePreview);
 
+    const column_pattern = /^{{< col ?(class="(.*?)")? >}}\n([\S\s]*?)\n{{< \/col >}}/;
+
     CMS.registerEditorComponent({
       id: "row",
       label: "Row",
@@ -48,9 +50,18 @@
         return `{{< row class="${obj.class}" >}}\n${obj.content}\n{{< /row >}}`;
       },
       toPreview: function(obj) {
+
+        const final_columns = [];
+        const columns = obj.content.match(/^{{< col ?(class="(.*?)")? >}}\n([\S\s]*?)\n{{< \/col >}}/gm);
+        columns.forEach(column => {
+          final_columns.push(`<div class="${column.match(column_pattern)[2]}">${column.match(column_pattern)[3]}</div>`)
+        })
+
+        console.log(final_columns)
+
         return (
           `<div class="row ${obj.class}">
-            ${obj.content}
+              ${final_columns}
           </div>`
         );
       }
@@ -62,7 +73,7 @@
       fields: [
         {name: 'content', label: 'Column Content', widget: 'markdown'},
       ],
-      pattern: /^{{< col ?(class="(.*?)")? >}}\n([\S\s]*?)\n{{< \/col >}}/,
+      pattern: column_pattern,
       fromBlock: function(match) {
         return {
           class: match[2],
